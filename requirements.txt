@@ -1,0 +1,11 @@
+tqdm
+scikit-learn==1.2.2
+pandas
+config
+matplotlib
+pyyaml
+python-dotenv
+torch-geometric
+torch-scatter
+torch-sparse
+torch-cluster
