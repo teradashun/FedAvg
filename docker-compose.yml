@@ -1,12 +1,12 @@
 services:
-  app:
-    image: fed_avg:latest
-    user: "${UID}:${GID}"
-  
   simulation:
     build: .
     image: fed_avg:latest
     container_name: fl
+    user: "${UID}:${GID}"
+    environment:
+      - MPLCONFIGDIR=/tmp/matplotlib
+      - HOME=/tmp
     volumes:
       - .:/workspace
     deploy:

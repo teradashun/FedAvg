@@ -1,19 +1,43 @@
 import numpy as np
+import torch
 import torchvision
 import torchvision.transforms as transforms
 from torch.utils.data import Subset
 
-def get_mnist_datasets():
-    train_dataset = torchvision.datasets.MNIST(root="./data",
-                                           train=True,
-                                           transform=transforms.ToTensor(),
-                                           download=True)
 
-    test_dataset = torchvision.datasets.MNIST(root="./data",
-                                          train=False,
-                                          transform=transforms.ToTensor(),
-                                          download=True)
-    return train_dataset, test_dataset
+def get_datasets(batch_size, data_name):
+    if data_name == "MNIST":
+        train_dataset = torchvision.datasets.MNIST(root="./data",
+                                            train=True,
+                                            transform=transforms.ToTensor(),
+                                            download=True)
+
+        test_dataset = torchvision.datasets.MNIST(root="./data",
+                                            train=False,
+                                            transform=transforms.ToTensor(),
+                                            download=True)
+
+        test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                            batch_size=batch_size,
+                                            shuffle=False)
+    
+    elif data_name == "CIFAR_10":
+        train_dataset = torchvision.datasets.CIFAR10(root="./data/CIFAR_10",
+                                            train=True,
+                                            transform=transforms.ToTensor(),
+                                            download=True)
+
+        test_dataset = torchvision.datasets.CIFAR10(root="./data/CIFAR_10",
+                                            train=False,
+                                            transform=transforms.ToTensor(),
+                                            download=True)
+
+        test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                            batch_size=batch_size,
+                                            shuffle=False)
+
+    return train_dataset, test_loader
+
 
 def split_dataset(dataset, num_clients, dirichlet_alpha):
     num_classes = 10
