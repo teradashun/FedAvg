@@ -1,7 +1,8 @@
 __pycache__
 .cache/
 .gnupg/
-.ssh./
+.dotnet/
+.ssh/
 .vscode-server
 data/
 src/__pycache__
